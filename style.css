@@ -213,3 +213,330 @@ body {
     text-align: right;
     color: var(--text-dark);
 }
+
+
+/* Responsive layout improvements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    padding: clamp(12px, 3vw, 40px);
+    overflow-x: hidden;
+}
+
+#app {
+    width: 100%;
+    max-width: 1100px;
+    min-width: 0;
+    margin: 0 auto;
+}
+
+.main-title {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    line-height: 1.15;
+    padding-top: clamp(0.5rem, 2vw, 2rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+    overflow-wrap: anywhere;
+}
+
+.budget-tracker {
+    width: 100%;
+    min-width: 0;
+    table-layout: auto;
+}
+
+.budget-tracker th,
+.budget-tracker td {
+    overflow-wrap: anywhere;
+}
+
+.budget-tracker th {
+    padding: 12px 10px;
+}
+
+.budget-tracker td {
+    padding: 10px 8px;
+}
+
+.input {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.filters {
+    width: 100%;
+    gap: clamp(6px, 2vw, 12px);
+}
+
+.filter-btn,
+.new-entry {
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.new-entry {
+    border: 0;
+    border-radius: 12px;
+    padding: 0.85rem 1.2rem;
+    background: var(--vintage-grape);
+    color: var(--text-white);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.new-entry:hover {
+    filter: brightness(1.08);
+}
+
+.controls {
+    text-align: right;
+}
+
+.summary {
+    text-align: right;
+    font-size: 1.05rem;
+}
+
+.total {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.delete-entry {
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.input:focus-visible,
+.filter-btn:focus-visible,
+.new-entry:focus-visible,
+.delete-entry:focus-visible {
+    outline: 3px solid var(--powder-blue);
+    outline-offset: 2px;
+}
+
+/* Tablet and phone layouts */
+@media (max-width: 760px) {
+    body {
+        padding: 16px 12px;
+    }
+
+    .main-title {
+        letter-spacing: 0.2px;
+    }
+
+    .budget-tracker {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .budget-tracker th {
+        font-size: 0.78rem;
+        padding: 9px 5px;
+    }
+
+    .budget-tracker td {
+        padding: 8px 5px;
+        border-bottom-width: 6px;
+    }
+
+    .input {
+        height: 44px;
+        padding: 0 7px;
+        font-size: 16px;
+        border-radius: 9px;
+    }
+
+    .input-date {
+        min-width: 0;
+    }
+
+    .input-description {
+        min-width: 0;
+    }
+
+    .input-amount {
+        min-width: 0;
+    }
+
+    .delete-entry {
+        width: 36px;
+        min-width: 36px;
+        padding: 0;
+    }
+
+    .filters {
+        margin-bottom: 1rem;
+    }
+
+    .filter-btn {
+        padding: 0.7rem 0.35rem;
+        font-size: 0.95rem;
+    }
+
+    .summary {
+        font-size: 0.98rem;
+    }
+}
+
+/* On very narrow screens, turn each transaction into a compact card.
+   The existing table markup and JavaScript continue to work. */
+@media (max-width: 520px) {
+    .budget-tracker,
+    .budget-tracker tbody,
+    .budget-tracker tfoot {
+        display: block;
+        width: 100%;
+    }
+
+    .budget-tracker thead {
+        display: none;
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px;
+        margin: 0 0 12px;
+        padding: 12px;
+        background: var(--soft-section);
+        border: 1px solid var(--blue-light);
+        border-radius: 14px;
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td {
+        display: block;
+        min-width: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(2) {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(1) {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(3) {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(4) {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(5) {
+        grid-column: 2;
+        grid-row: 3;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(1)::before {
+        content: "Date";
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(2)::before {
+        content: "Description";
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(3)::before {
+        content: "Type";
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td:nth-child(4)::before {
+        content: "Amount (£)";
+    }
+
+    .budget-tracker tbody.entries tr:not(.empty-row) td::before {
+        display: block;
+        margin: 0 0 5px;
+        color: var(--text-light);
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .budget-tracker tbody.entries tr.empty-row {
+        display: block;
+        width: 100%;
+    }
+
+    .budget-tracker tbody.entries tr.empty-row td {
+        display: block;
+        width: 100%;
+        padding: 1.25rem 0.75rem;
+        border: 0;
+        border-radius: 12px;
+    }
+
+    .budget-tracker tbody:not(.entries) {
+        display: block;
+        width: 100%;
+    }
+
+    .budget-tracker tbody:not(.entries) tr,
+    .budget-tracker tbody:not(.entries) td,
+    .budget-tracker tfoot tr,
+    .budget-tracker tfoot td {
+        display: block;
+        width: 100%;
+    }
+
+    .budget-tracker tbody:not(.entries) td.controls {
+        padding: 0 0 12px;
+        border: 0;
+        background: transparent;
+    }
+
+    .new-entry {
+        width: 100%;
+    }
+
+    .budget-tracker tfoot td.summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        text-align: left;
+        padding: 14px 12px;
+        border: 1px solid var(--blue-light);
+        border-radius: 12px;
+        background: var(--card-bg);
+    }
+
+    .budget-tracker tbody.entries tr:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
